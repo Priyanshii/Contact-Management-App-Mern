@@ -6,12 +6,12 @@ import contactsRoutes from './routes/contacts.js';
 
 dotenv.config();
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json({limit: "10mb"}));
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://contact-management-app-mern.vercel.app/'],
   credentials: true,
 }));
 app.use(express.urlencoded({limit: '10mb', extended: true}));
