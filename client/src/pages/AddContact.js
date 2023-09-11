@@ -1,8 +1,6 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ContactForm from '../components/ContactForm';
-import { getAllContacts } from '../redux/slices/contactsSlice';
 
 const AddContact = () => {
 
@@ -19,4 +17,4 @@ const AddContact = () => {
   )
 }
 
-export default AddContact
+export default AddContact;

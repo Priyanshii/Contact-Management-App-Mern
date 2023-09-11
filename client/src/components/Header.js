@@ -1,5 +1,5 @@
-import React from 'react'
-import SearchBar from './SearchBar'
+import React from 'react';
+import SearchBar from './SearchBar';
 import { HiPlus } from 'react-icons/hi';
 import { BsSortAlphaDown, BsSortAlphaUpAlt } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const Header = () => {
 
   const dispatch = useDispatch();
-  const { contactsList } = useSelector((store) => store.contacts.contactsData);
   const { contactsList:updatedContactsList } = useSelector((store) => store.contacts.updatedContactsData);
 
   const handleSortContactsByName = (sortType) => {
@@ -40,4 +39,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default Header;

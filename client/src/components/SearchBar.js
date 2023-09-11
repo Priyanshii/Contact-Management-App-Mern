@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSearchedContacts } from '../redux/slices/contactsSlice';
 
 const SearchBar = () => {
+
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState('');
   const { contactsList } = useSelector((store) => store.contacts.contactsData);

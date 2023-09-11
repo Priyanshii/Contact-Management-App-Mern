@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteContact, getContactDetails } from '../redux/slices/contactsSlice';
 import { HiOutlinePencilSquare } from 'react-icons/hi2';
@@ -39,4 +39,4 @@ const ContactCard = ({ _id, index, name, email, phoneNumber, createdAt, handleCo
   )
 }
 
-export default ContactCard
+export default ContactCard;

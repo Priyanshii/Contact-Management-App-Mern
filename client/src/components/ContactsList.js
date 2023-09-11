@@ -9,7 +9,8 @@ const ContactsList = () => {
 
   const [showContactForm, setShowContactForm] = useState(false);
   const { contactsList } = useSelector((store) => store.contacts.updatedContactsData);
-  const { contactDetails, loading } = useSelector((store) => store.contacts);
+  const { loading } = useSelector((store) => store.contacts.updatedContactsData);
+  const { contactDetails } = useSelector((store) => store.contacts);
   const ref = useRef();
 
   useOutsideClick(ref, () => {
