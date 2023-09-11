@@ -7,7 +7,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
 
   const dispatch = useDispatch();
   const { loading } = useSelector((store) => store.contacts);
-
+  const buttonRef = useRef(null);
   const { _id, name, email: initialEmail, phoneNumber: initialPhoneNumber } = contactDetails;
   const [initialFirstName, ...initialLastName] = name?.split(' ').filter(Boolean) || [];
 
@@ -31,6 +31,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    buttonRef.current.disabled = true;
 
     if (type === 'add') {
       dispatch(createNewContact(formData, gotoIndexPage));
@@ -111,7 +112,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
                 />
                 <span className='absolute bottom-[-20px] left-0 text-xs font-normal text-gray-500'>Phone number must be a 10 digit number</span>
               </div>
-              <button type='submit' className='px-4 py-2 mt-10 bg-[#156da0] hover:bg-[#11547a] rounded-full text-white m-auto'>
+              <button ref={buttonRef} type='submit' className='px-4 py-2 mt-10 bg-[#156da0] hover:bg-[#11547a] rounded-full text-white m-auto'>
                 Save
               </button>
             </form>
