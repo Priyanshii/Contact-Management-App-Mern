@@ -22,7 +22,7 @@ const ContactCard = ({ _id, index, name, email, phoneNumber, createdAt, handleCo
     <>
       <tr className={`${index%2 === 0 ? 'bg-white' : 'bg-gray-100'} text-sm py-2`}>
         <td className='p-2 px-4'>{index}</td>
-        <td className='p-2'>{name}</td>
+        <td className='p-2 capitalize'>{name}</td>
         <td className='p-2'>{email}</td>
         <td className='p-2'>{phoneNumber}</td>
         <td className='p-2'>{createdAt?.split('T')[0]}</td>
