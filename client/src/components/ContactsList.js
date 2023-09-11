@@ -1,17 +1,29 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ContactForm from './ContactForm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContactCard from './ContactCard';
 import useOutsideClick from '../helpers/useOutsideClick';
 import LoadingComponent from './LoadingComponent';
+import Pagination from './Pagination';
+import usePagination from '../helpers/usePagination';
+import { setContactsListDisplay } from '../redux/slices/contactsSlice';
 
 const ContactsList = () => {
 
   const [showContactForm, setShowContactForm] = useState(false);
   const { contactsList } = useSelector((store) => store.contacts.updatedContactsData);
+  const { contactsListDisplay } = useSelector((store) => store.contacts);
   const { loading } = useSelector((store) => store.contacts.updatedContactsData);
   const { contactDetails } = useSelector((store) => store.contacts);
+
+  const { gotoPage, currentDataToDisplay, currentPage, totalPages } = usePagination(contactsList)
+  const dispatch = useDispatch();
   const ref = useRef();
+
+  useEffect(() => {
+    gotoPage(1);
+    dispatch(setContactsListDisplay(currentDataToDisplay(1)));
+  }, [contactsList])
 
   useOutsideClick(ref, () => {
     closeModal();
@@ -40,7 +52,7 @@ const ContactsList = () => {
           ?
           <LoadingComponent />
           :
-          <>
+          <div className='flex flex-col gap-4'>
             <table className='mt-6 shadow-md'>
               <thead className='text-left bg-[#115C88] text-white h-8'>
                 <tr>
@@ -57,7 +69,7 @@ const ContactsList = () => {
                 &&
                 <tbody>
                   {
-                    contactsList.map((contact, index) => {
+                    contactsListDisplay.map((contact, index) => {
                       return (
                         <ContactCard key={contact._id} index={index + 1} {...contact} handleContactFormModal={handleContactFormModal} />
                       );
@@ -67,16 +79,17 @@ const ContactsList = () => {
               }
             </table>
             {
-              (contactsList?.length === 0  && !loading)
+              (contactsList?.length === 0 && !loading)
               &&
               <div className='w-full h-28 pb-4 font-medium text-base text-gray-600 flex items-center justify-center shadow-md'>
                 No Contacts
               </div>
             }
-          </>
+            <Pagination currentPage={currentPage} totalPages={totalPages} gotoPage={gotoPage} currentDataToDisplay={currentDataToDisplay} />
+          </div>
       }
     </>
   )
 }
 
-export default ContactsList
+export default ContactsList;

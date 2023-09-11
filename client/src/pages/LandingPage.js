@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import ContactsList from '../components/ContactsList'
 import Header from '../components/Header'
@@ -20,4 +20,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage
+export default LandingPage;

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
   loading: false,
   error: { isError: false, message: '' },
+  contactsListDisplay: [],
   contactsData: {
     totalPages: 1,
     currentPage: 1,
@@ -26,6 +27,9 @@ const contactsSlice = createSlice({
   reducers: {
     setLoading: (state, { payload }) => {
       state.loading = payload;
+    },
+    setContactsListDisplay: (state, { payload }) => {
+      state.contactsListDisplay = payload;
     },
     setUpdatedContactsDataLoading: (state, { payload }) => {
       state.updatedContactsData.loading = payload;
@@ -60,19 +64,17 @@ const contactsSlice = createSlice({
       state.error = { isError: true, message: payload };
     },
     setSearchedContactsSuccess: (state, { payload }) => {
-      state.loading = false;
       state.updatedContactsData.contactsList = [...payload];
       state.error = { isError: false, message: '' };
     },
     setSortedContactsSuccess: (state, { payload }) => {
-      state.loading = false;
       state.updatedContactsData.contactsList = [...payload];
       state.error = { isError: false, message: '' };
     }
   }
 })
 
-export const { setLoading, setUpdatedContactsDataLoading, setContactListCurrentPage, setUpdatedContactListCurrentPage, setAllContactsSuccess, setUpdatedAllContactsSuccess, setUpdatedAllContactsFailure, setContactDetailsSuccess, setContactDetailsFailure, setSearchedContactsSuccess, setSortedContactsSuccess } = contactsSlice.actions;
+export const { setLoading, setContactsListDisplay, setUpdatedContactsDataLoading, setContactListCurrentPage, setUpdatedContactListCurrentPage, setAllContactsSuccess, setUpdatedAllContactsSuccess, setUpdatedAllContactsFailure, setContactDetailsSuccess, setContactDetailsFailure, setSearchedContactsSuccess, setSortedContactsSuccess } = contactsSlice.actions;
 
 export default contactsSlice.reducer;
 
