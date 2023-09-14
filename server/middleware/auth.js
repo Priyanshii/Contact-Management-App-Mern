@@ -1,4 +1,5 @@
 import axios from 'axios';
+import User from '../models/User.js';
 
 const auth = async(req, res, next) => {
   const token = req.headers["x-access-token"];
@@ -9,8 +10,7 @@ const auth = async(req, res, next) => {
 
   try { 
     const decodedData = await axios.get(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`);
-
-    req.userId = decodedData?.sub;
+    req.user = await User.findById(decodedData.data.sub);
     next();
 
   } catch (error) {

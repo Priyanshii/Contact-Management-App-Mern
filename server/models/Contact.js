@@ -21,8 +21,9 @@ const contactSchema = new mongoose.Schema({
     index: true,
   },
   postedBy: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "User",
+    required: true,
   },
   createdAt: {
     type: Date,

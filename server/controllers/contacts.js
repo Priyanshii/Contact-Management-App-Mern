@@ -6,8 +6,9 @@ import Contact from '../models/Contact.js';
 const router = express.Router();
 
 export const getAllContacts = async (req, res) => {
+  console.log(req.user._id);
   try {
-    const contacts = await Contact.find().sort({ createdAt: -1 });
+    const contacts = await Contact.find({ postedBy: req.user._id}).sort({ createdAt: -1 });
 
     return res.status(200).json({ data: contacts });
 
@@ -36,7 +37,7 @@ export const createContact = async (req, res) => {
   const contactData = req.body;
 
   try {
-    const response = await Contact.create({ ...contactData });
+    const response = await Contact.create({ ...contactData, postedBy: req.user._id });
     res.status(201).json(response);
   } catch (error) {
     console.log(error);
@@ -47,12 +48,16 @@ export const createContact = async (req, res) => {
 export const updateContact = async (req, res) => {
   const { id } = req.params;
   const contactData = req.body;
-
-  try {
-    const response = await Contact.findByIdAndUpdate(id, contactData, { new: true });
-    res.status(201).json(response);
-  } catch (error) {
-    res.status(404).json({ message: error.message });
+  if (req.userId.toString() !== contactData.postedBy) {
+    return res.status(403).json({ message: 'User is not authorized to update the data' });
+  }
+  else{
+    try {
+      const response = await Contact.findByIdAndUpdate(id, contactData, { new: true });
+      res.status(201).json(response);
+    } catch (error) {
+      res.status(404).json({ message: error.message });
+    }
   }
 }
 

@@ -64,14 +64,12 @@ export const getUserData = () => dispatch => {
   dispatch(getUserSuccess(JSON.parse(userData)));
 }
 
-export const removeUserData = (callback) => async dispatch => {
+export const logoutUser = () => async dispatch => {
   try {
     localStorage.removeItem("contact-app-user");
     localStorage.removeItem("token");
     dispatch(removeUser());
-    if (callback) {
-      callback();
-    }
+    window.location.reload();
 
   } catch (error) {
     toast.error(error.response.data.message);

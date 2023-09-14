@@ -112,7 +112,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
                 />
                 <span className='absolute bottom-[-20px] left-0 text-xs font-normal text-gray-500'>Phone number must be a 10 digit number</span>
               </div>
-              <button ref={buttonRef} type='submit' className='px-4 py-2 mt-10 bg-[#156da0] hover:bg-[#11547a] rounded-full text-white m-auto'>
+              <button ref={buttonRef} type='submit' className='px-4 py-2 mt-10 bg-[#156da0] hover:bg-[#11547a] rounded-full text-white m-auto cursor-pointer'>
                 Save
               </button>
             </form>

@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import axios from '../Api';
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { logoutUser } from './userSlice';
 
 const initialState = {
   loading: false,
@@ -85,9 +86,14 @@ export const getAllContacts = () => async (dispatch) => {
 
     dispatch(setAllContactsSuccess(response.data));
     dispatch(setUpdatedAllContactsSuccess(response.data));
+    
   } catch (error) {
     console.log(error.message);
-    if (error.response.status === 404) {
+    if (error.response.status === 401) {
+      dispatch(logoutUser());
+      toast.error("Please Login again");
+    }
+    else if (error.response.status === 404) {
       toast.error(error.message);
     }
     else {
@@ -105,7 +111,11 @@ export const getContactDetails = (contactId) => async (dispatch) => {
 
   } catch (error) {
     console.log(error.message);
-    if (error.response.status === 404) {
+    if (error.response.status === 401) {
+      dispatch(logoutUser());
+      toast.error("Please Login again");
+    }
+    else if (error.response.status === 404) {
       toast.error(error.message);
     }
     else {
@@ -162,7 +172,11 @@ export const createNewContact = (contactData, callback) => async (dispatch) => {
 
   } catch (error) {
     console.log(error);
-    if (error.response.status === 409) {
+    if (error.response.status === 401) {
+      dispatch(logoutUser());
+      toast.error("Please Login again");
+    }
+    else if (error.response.status === 409) {
       toast.error(error.message);
     }
     else {
@@ -186,7 +200,13 @@ export const updateContact = (contactData) => async (dispatch) => {
     }
   } catch (error) {
     console.log(error)
-    toast.error(error.response.data.message);
+    if (error.response.status === 401) {
+      dispatch(logoutUser());
+      toast.error("Please Login again");
+    }
+    else{
+      toast.error(error.response.data.message);
+    }
   }
 }
 
@@ -200,6 +220,12 @@ export const deleteContact = (_id) => async (dispatch) => {
     }
   } catch (error) {
     console.log(error);
-    toast.error(error.response.data.message);
+    if (error.response.status === 401) {
+      dispatch(logoutUser());
+      toast.error("Please Login again");
+    }
+    else{
+      toast.error(error.response.data.message);
+    }
   }
 }
