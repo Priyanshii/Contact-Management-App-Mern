@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import LoadingComponent from '../components/LoadingComponent';
 import { AnonymousRoute } from '../components/Routes/AnonymousRoute';
 import { PrivateRoute } from '../components/Routes/PrivateRoute';
 import AddContact from './AddContact';

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setContactsListDisplay } from '../redux/slices/contactsSlice';
 
 const Pagination = ({ gotoPage, currentDataToDisplay, currentPage, totalPages }) => {

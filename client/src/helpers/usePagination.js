@@ -1,12 +1,11 @@
-import React, { useMemo, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useMemo, useState } from 'react';
 
 const usePagination = (data) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = useMemo(() => {
     return (data.length > 0 ? Math.ceil(data.length / 10) : 1)
-  },[data]);
+  }, [data]);
 
   function currentDataToDisplay(page) {
     const pageNumber = Math.min(Math.max(1, page), totalPages);
@@ -17,7 +16,7 @@ const usePagination = (data) => {
 
   function gotoPage(page) {
     const pageNumber = Math.max(1, page);
-    setCurrentPage((currentPage) => { 
+    setCurrentPage((currentPage) => {
       return Math.min(pageNumber, totalPages)
     });
   }

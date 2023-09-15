@@ -42,7 +42,7 @@ const ContactsList = () => {
       {
         showContactForm &&
         <div className='fixed z-5 top-0 left-0 bottom-0 h-[100vh] w-[100vw] bg-black/[0.65] flex items-center justify-center'>
-          <div ref={ref} className='h-auto bg-white flex items-center justify-center'>
+          <div ref={ref} className='h-auto bg-white sm:py-4 flex items-center justify-center'>
             <ContactForm type='edit' gotoIndexPage={closeModal} {...contactDetails} />
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { createNewContact, updateContact } from '../redux/slices/contactsSlice';
 import LoadingComponent from './LoadingComponent';
+import { FaTimes } from 'react-icons/fa';
 
 const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
 
@@ -59,31 +60,36 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
   }
 
   return (
-    <section className='w-auto py-8 px-10 flex flex-col items-center justify-between gap-10 shadow-2xl border-[1px] border-solid border-[#e9e4e4]'>
+    <section className='sm:w-[90%] w-auto py-8 px-10 flex flex-col items-center justify-between gap-10 shadow-2xl border-[1px] border-solid border-[#e9e4e4] bg-white relative'>
       {
         loading
           ?
           <LoadingComponent />
           :
           <>
-            <span className='text-xl font-medium text-gray-700 '>
+            <div className='text-xl font-medium text-gray-700 '>
               {
                 type === 'add'
                   ?
                   'Add Contact'
                   :
-                  'Edit Contact'
+                  <>
+                    <span>Edit Contact</span>
+                    <button className='absolute top-5 right-5 cursor-pointer p-1s' onClick={gotoIndexPage}>
+                      <FaTimes className='w-3 h-3' />
+                    </button>
+                  </>
               }
-            </span>
-            <form className='flex flex-col justify-between items-start gap-8' onSubmit={handleSubmit}>
-              <section className='flex flex-row items-center justify-around gap-8'>
+            </div>
+            <form className='w-full flex flex-col justify-between items-start gap-8' onSubmit={handleSubmit}>
+              <section className='w-full flex flex-row sm:flex-col items-center justify-around gap-8'>
                 <input
                   type="text"
                   name='firstName'
                   placeholder='First Name'
                   value={formData.firstName}
                   onChange={handleChange}
-                  className='text-base p-3 pl-1 w-44 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
+                  className='text-base p-3 pl-1 w-44 sm:w-full border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                   required
                   minLength={2}
                   maxLength={40}
@@ -94,7 +100,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
                   placeholder='Last Name'
                   value={formData.lastName}
                   onChange={handleChange}
-                  className='text-base p-3 pl-1 w-44 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
+                  className='text-base p-3 pl-1 w-44 sm:w-full border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                   required
                   minLength={2}
                   maxLength={40}
@@ -106,11 +112,10 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
                 placeholder='Email'
                 value={formData.email}
                 onChange={handleChange}
-                className='text-base p-3 pl-1 w-96 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
+                className='text-base p-3 pl-1 w-96 sm:w-full border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                 required
               />
-              <div className='relative'>
-
+              <div className='relative w-full'>
                 <input
                   type="tel"
                   name='phoneNumber'
@@ -118,10 +123,10 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
                   value={formData.phoneNumber}
                   onChange={handleChange}
                   pattern="[0-9]{10}"
-                  className='text-base p-3 pl-1 w-96 border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
+                  className='text-base p-3 pl-1 w-96 sm:w-full border-b-[1px] border-solid border-[#8b8787] outline-none focus:border-[#1ac914]'
                   required
                 />
-                <span className='absolute bottom-[-20px] left-0 text-xs font-normal text-gray-500'>Phone number must be a 10 digit number</span>
+                <span className='absolute top-[52px] left-0 text-xs font-normal text-gray-500 align-bottom'>Phone number must be a 10 digit number</span>
               </div>
               <button ref={buttonRef} type='submit' className='px-4 py-2 mt-10 bg-[#156da0] hover:bg-[#11547a] rounded-full text-white m-auto cursor-pointer'>
                 Save
