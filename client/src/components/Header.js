@@ -50,7 +50,7 @@ const Header = () => {
             Sign out
           </button>
         </section>
-        <button onClick={toggle} className="hidden md:block cursor-pointer ">
+        <button onClick={() => {setIsOpen(true)}} className="hidden md:block cursor-pointer ">
           <FaBars className='w-5 h-5' />
         </button>
         <SideBarMobile isOpen={isOpen} toggle={toggle} handleSortContactsByName={handleSortContactsByName} handleSignOutButton={handleSignOutButton} />

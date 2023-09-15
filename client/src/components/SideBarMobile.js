@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const SideBarMobile = ({ isOpen, toggle, handleSortContactsByName, handleSignOutButton }) => {
   return (
-    <div className={`${isOpen ? ' opacity-100 top-0' : ' opacity-0 top-[-100%]'} w-full h-[100vh] fixed left-0 z-10 hidden md:flex md:flex-col md:items-center md:justify-center bg-white`}>
+    <div className={`${isOpen ? ' opacity-100 top-0' : ' opacity-0 top-[-100vh]'} w-full h-[100vh] fixed left-0 z-10 hidden md:flex md:flex-col md:items-center md:justify-center bg-white`}>
       <button className='absolute top-5 right-5 cursor-pointer' onClick={toggle}>
         <FaTimes className='w-5 h-5' />
       </button>
