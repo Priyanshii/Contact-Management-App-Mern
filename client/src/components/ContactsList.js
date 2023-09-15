@@ -53,38 +53,40 @@ const ContactsList = () => {
           <LoadingComponent />
           :
           <div className='flex flex-col gap-4'>
-            <table className='mt-6 shadow-md'>
-              <thead className='text-left bg-[#115C88] text-white h-8'>
-                <tr>
-                  <th className='p-2 px-4 text-base font-medium'>Index</th>
-                  <th className='p-2 text-base font-medium'>Name</th>
-                  <th className='p-2 text-base font-medium'>Email</th>
-                  <th className='p-2 text-base font-medium'>Phone</th>
-                  <th className='p-2 text-base font-medium'>Created At</th>
-                  <th className='p-2 text-base font-medium'>Action</th>
-                </tr>
-              </thead>
+            <div className='flex flex-col overflow-x-auto shadow-md'>
+              <table className='mt-6 '>
+                <thead className='text-left bg-[#115C88] text-white h-8'>
+                  <tr>
+                    <th className='p-2 px-4 text-base font-medium'>Index</th>
+                    <th className='p-2 text-base font-medium'>Name</th>
+                    <th className='p-2 text-base font-medium'>Email</th>
+                    <th className='p-2 text-base font-medium'>Phone</th>
+                    <th className='p-2 text-base font-medium'>Created At</th>
+                    <th className='p-2 text-base font-medium'>Action</th>
+                  </tr>
+                </thead>
+                {
+                  contactsList.length > 0
+                  &&
+                  <tbody>
+                    {
+                      contactsListDisplay.map((contact, index) => {
+                        return (
+                          <ContactCard key={contact._id} index={index + 1} {...contact} handleContactFormModal={handleContactFormModal} />
+                        );
+                      })
+                    }
+                  </tbody>
+                }
+              </table>
               {
-                contactsList.length > 0
+                (contactsList?.length === 0 && !loading)
                 &&
-                <tbody>
-                  {
-                    contactsListDisplay.map((contact, index) => {
-                      return (
-                        <ContactCard key={contact._id} index={index + 1} {...contact} handleContactFormModal={handleContactFormModal} />
-                      );
-                    })
-                  }
-                </tbody>
+                <div className='w-full h-28 pb-4 font-medium text-base text-gray-600 flex items-center justify-center shadow-md'>
+                  No Contacts
+                </div>
               }
-            </table>
-            {
-              (contactsList?.length === 0 && !loading)
-              &&
-              <div className='w-full h-28 pb-4 font-medium text-base text-gray-600 flex items-center justify-center shadow-md'>
-                No Contacts
-              </div>
-            }
+            </div>
             <Pagination currentPage={currentPage} totalPages={totalPages} gotoPage={gotoPage} currentDataToDisplay={currentDataToDisplay} />
           </div>
       }

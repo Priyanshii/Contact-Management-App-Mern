@@ -10,6 +10,7 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
   const buttonRef = useRef(null);
   const { _id, name, email: initialEmail, phoneNumber: initialPhoneNumber } = contactDetails;
   const [initialFirstName, ...initialLastName] = name?.split(' ').filter(Boolean) || [];
+  let timer = useRef(null);
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -29,9 +30,19 @@ const ContactForm = ({ type, gotoIndexPage, ...contactDetails }) => {
     )
   }, [name])
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    }
+  }, [])
+
   const handleSubmit = (event) => {
     event.preventDefault();
     buttonRef.current.disabled = true;
+
+    timer.current = setTimeout(() => {
+      buttonRef.current.disabled = false;
+    }, 5000);
 
     if (type === 'add') {
       dispatch(createNewContact(formData, gotoIndexPage));
