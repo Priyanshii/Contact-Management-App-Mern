@@ -52,6 +52,7 @@ export const signInUserWithGoogle = (data, callback) => async (dispatch) => {
       if (callback) {
         callback();
       }
+      dispatch(setLoading(false));
     }
   } catch (error) {
     toast.error(error.response.data.message);

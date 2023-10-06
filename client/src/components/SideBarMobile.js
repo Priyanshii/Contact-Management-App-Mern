@@ -35,4 +35,4 @@ const SideBarMobile = ({ isOpen, toggle, handleSortContactsByName, handleSignOut
   )
 }
 
-export default SideBarMobile
+export default SideBarMobile;

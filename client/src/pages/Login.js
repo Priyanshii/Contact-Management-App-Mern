@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc';
 import { useGoogleLogin } from '@react-oauth/google';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signInUserWithGoogle } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import LoadingComponent from '../components/LoadingComponent';
 
 const Login = () => {
 
   const dispatch = useDispatch();
   const  navigate = useNavigate();
-  
+  const { loading } = useSelector((store) => store.user);
+
   const gotoIndexPage = () => {
     navigate("/");
   }
@@ -30,6 +32,9 @@ const Login = () => {
         <FcGoogle className='w-9 h-9 mr-4'/>
         <span className=' text-lg text-white'>Sign in with Google</span>
       </button>
+      {
+        loading && <LoadingComponent />
+      }
     </div>
   )
 }
