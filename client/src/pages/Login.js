@@ -25,7 +25,7 @@ const Login = () => {
   })
 
   return (
-    <div className='w-[100vw] h-[100vh] flex flex-col items-center justify-start bg-login'>
+    <div className={` w-[100vw] h-[100vh] flex flex-col items-center justify-start bg-login ${loading ? "pointer-events-none" : "pointer-events-auto"}`}>
       <span className=' mt-10 text-4xl font-medium text-white'>Welcome to App</span>
       <span className='mt-2 text-lg font-normal text-white'>Please Login to access</span>
       <button className='w-72 p-3 rounded-full border-[1px] border-solid border-white flex flex-row items-center justify-center text-base mt-28' onClick={() => login()}>
