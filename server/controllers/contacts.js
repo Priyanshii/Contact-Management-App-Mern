@@ -49,16 +49,12 @@ export const createContact = async (req, res) => {
 export const updateContact = async (req, res) => {
   const { id } = req.params;
   const contactData = req.body;
-  if (req.userId.toString() !== contactData.postedBy) {
-    return res.status(403).json({ message: 'User is not authorized to update the data' });
-  }
-  else {
-    try {
-      const response = await Contact.findByIdAndUpdate(id, contactData, { new: true });
-      res.status(201).json(response);
-    } catch (error) {
-      res.status(404).json({ message: error.message });
-    }
+
+  try {
+    const response = await Contact.findByIdAndUpdate(id, contactData, { new: true });
+    res.status(201).json(response);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
   }
 }
 
